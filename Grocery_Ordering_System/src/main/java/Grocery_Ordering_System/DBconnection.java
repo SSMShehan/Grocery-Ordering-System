@@ -12,7 +12,7 @@ public class DBconnection {
 	public static Connection getConnection() {
 		try {
 			// Updated driver class name for newer MySQL versions
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("Attempting to connect to database: " + url);
 			con = DriverManager.getConnection(url, user, pass);
 			System.out.println("Database connection successful");

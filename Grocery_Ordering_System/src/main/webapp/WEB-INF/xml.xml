@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+         
+         <!-- Login Servlets -->
+<servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>LoginPackage.LoginServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>RegisterServlet</servlet-name>
+    <servlet-class>LoginPackage.RegisterServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>RegisterServlet</servlet-name>
+    <url-pattern>/RegisterServlet</url-pattern>
+</servlet-mapping>
+
+<servlet>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>LoginPackage.LogoutServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet</url-pattern>
+</servlet-mapping>
+
+
+
+    <!-- Customer Servlets -->
+    <servlet>
+        <servlet-name>CustomerServlet</servlet-name>
+        <servlet-class>CustomerPackage.CustomerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomerServlet</servlet-name>
+        <url-pattern>/CustomerServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CustomerInsertServlet</servlet-name>
+        <servlet-class>CustomerPackage.CustomerInsertServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomerInsertServlet</servlet-name>
+        <url-pattern>/CustomerInsertServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CustomerUpdateServlet</servlet-name>
+        <servlet-class>CustomerPackage.CustomerUpdateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomerUpdateServlet</servlet-name>
+        <url-pattern>/CustomerUpdateServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Order Servlets -->
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>OrderPackage.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/OrderServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderInsertServlet</servlet-name>
+        <servlet-class>OrderPackage.OrderInsertServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderInsertServlet</servlet-name>
+        <url-pattern>/OrderInsertServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>OrderUpdateServlet</servlet-name>
+        <servlet-class>OrderPackage.OrderUpdateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderUpdateServlet</servlet-name>
+        <url-pattern>/OrderUpdateServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- Default welcome file -->
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
