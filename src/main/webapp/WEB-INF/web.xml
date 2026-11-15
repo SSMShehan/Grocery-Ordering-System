@@ -4,22 +4,24 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-    
+
+    <!-- Main URL -->
+    <welcome-file-list>
+        <welcome-file>customer.jsp</welcome-file>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
+
     <!-- Session Config -->
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
 
     <!-- Authentication Filter -->
-      <filter>
-    <filter-name>AuthenticationFilter</filter-name>
-    <filter-class>Control_Package.AuthenticationFilter</filter-class>
-</filter>
-    
-    <filter-mapping>
+    <filter>
         <filter-name>AuthenticationFilter</filter-name>
-        <url-pattern>/admin_*</url-pattern>
-    </filter-mapping>
+        <filter-class>Control_Package.AuthenticationFilter</filter-class>
+    </filter>
+
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
         <url-pattern>/admin/*</url-pattern>
@@ -44,12 +46,8 @@
         <filter-name>AuthenticationFilter</filter-name>
         <url-pattern>/UserServlet</url-pattern>
     </filter-mapping>
-    
 
-
-
-
-
+    <!-- Servlets -->
     <servlet>
         <servlet-name>ItemCategoryServlet</servlet-name>
         <servlet-class>category_page_package.ItemCategoryServlet</servlet-class>
@@ -58,7 +56,7 @@
         <servlet-name>ItemCategoryServlet</servlet-name>
         <url-pattern>/customer/ItemCategoryServlet</url-pattern>
     </servlet-mapping>
-    
+
     <servlet>
         <servlet-name>ItemDetailsServlet</servlet-name>
         <servlet-class>Control_Package.ItemDetailsServlet</servlet-class>
@@ -67,4 +65,5 @@
         <servlet-name>ItemDetailsServlet</servlet-name>
         <url-pattern>/customer/ItemDetailsServlet</url-pattern>
     </servlet-mapping>
+
 </web-app>
