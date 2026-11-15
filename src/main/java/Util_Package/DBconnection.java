@@ -11,24 +11,23 @@ public class DBconnection {
 
     public static Connection getConnection() {
         try {
-        
             if (url == null || url.isEmpty()) {
-                url = "jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres";
+                url = "jdbc:postgresql://aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres?sslmode=require";
             }
             if (user == null || user.isEmpty()) {
-                user = "postgres";
+                user = "postgres.mupdoceejdvgqkoqnsst";
             }
             if (pass == null || pass.isEmpty()) {
                 pass = ""; 
             }
 
             Class.forName("org.postgresql.Driver");
-            System.out.println("Attempting to connect to database...");
+            System.out.println("=== DB CONNECTING TO: " + url + " | USER: " + user + " ===");
             con = DriverManager.getConnection(url, user, pass);
-            System.out.println("Database connection successful");
+            System.out.println("=== DB CONNECTION SUCCESSFUL ===");
         }
         catch(Exception e) {
-            System.out.println("Database connection error: " + e.getMessage());
+            System.err.println("=== DB ERROR: " + e.getMessage() + " ===");
             e.printStackTrace();
         }
         return con;

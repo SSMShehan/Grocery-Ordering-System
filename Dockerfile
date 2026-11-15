@@ -2,26 +2,22 @@
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
-# Copy the pom.xml and source code
 COPY pom.xml .
 COPY src ./src
-
-# Package the application (builds target/grocery.war)
 RUN mvn clean package -DskipTests
 
 # Stage 2: Setup Tomcat to run the application
 FROM tomcat:9.0-jdk21
 WORKDIR /usr/local/tomcat
 
-# Remove default tomcat applications to keep things clean
+# Disable Tomcat shutdown port (8005) to stop Render health-check log spam
+RUN sed -i 's/port="8005" shutdown="SHUTDOWN"/port="-1" shutdown="SHUTDOWN"/g' conf/server.xml
+
+# Remove default tomcat applications
 RUN rm -rf webapps/*
 
-# Copy the built WAR file from the build stage. 
-# We rename it to ROOT.war so the application is served at the root URL (/) instead of /grocery
+# Copy the built WAR file
 COPY --from=build /app/target/grocery.war webapps/ROOT.war
 
-# Expose port 8080
 EXPOSE 8080
-
-# Start Tomcat server
 CMD ["catalina.sh", "run"]
