@@ -1,17 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.sql.*, java.util.*, Util_Package.DBconnection" %>
+<%@ page import="java.sql.*, java.util.*" %>
 <%
     String action = request.getParameter("action");
+    
+    String url = "jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres";
+    String dbUser = "postgres";
+    String dbPass = "1syERFX5ObrpQ5qR";
     
     Connection con = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
 
     try {
-        con = DBconnection.getConnection();
-        if (con == null) {
-            throw new Exception("Database connection failed. Please check server logs.");
-        }
+        Class.forName("org.postgresql.Driver");
+        con = DriverManager.getConnection(url, dbUser, dbPass);
         
         if ("register".equals(action)) {
             String username = request.getParameter("username");

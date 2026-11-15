@@ -15,7 +15,7 @@
     ResultSet navRs = null;
     try {
         Class.forName("org.postgresql.Driver");
-        navCon = con = DBconnection.getConnection("jdbc:postgresql://aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres", DBconnection.getConnection(), "1syERFX5ObrpQ5qR");
+        navCon = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
         navPst = navCon.prepareStatement("SELECT name FROM category ORDER BY name ASC");
         navRs = navPst.executeQuery();
         while (navRs.next()) {
