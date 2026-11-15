@@ -15,11 +15,11 @@
     ResultSet rs2 = null; 
     
     try { 
-        String url = "jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres"; 
-        String user = "postgres";
+        String url = "jdbc:postgresql://aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres"; 
+        String user = DBconnection.getConnection();
         String pass = "1syERFX5ObrpQ5qR"; 
         Class.forName("org.postgresql.Driver"); 
-        con = DriverManager.getConnection(url, user, pass); 
+        con = con = DBconnection.getConnection(url, user, pass); 
         
         // Fetch Flash Items (Items with discount)
         String query1 = "SELECT * FROM item WHERE discount_percentage > 0 AND quantity > '0' ORDER BY RANDOM() LIMIT 4";

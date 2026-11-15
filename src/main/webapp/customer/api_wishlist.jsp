@@ -23,7 +23,7 @@
             Connection con = null; PreparedStatement pst = null;
             try {
                 Class.forName("org.postgresql.Driver");
-                con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+                con = con = DBconnection.getConnection("jdbc:postgresql://aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres", DBconnection.getConnection(), "1syERFX5ObrpQ5qR");
                 pst = con.prepareStatement("INSERT INTO wishlist_item (userID, itemID) SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM wishlist_item WHERE userID=? AND itemID=?)");
                 pst.setInt(1, userID); pst.setInt(2, Integer.parseInt(itemId));
                 pst.setInt(3, userID); pst.setInt(4, Integer.parseInt(itemId));
@@ -44,7 +44,7 @@
             Connection con = null; PreparedStatement pst = null;
             try {
                 Class.forName("org.postgresql.Driver");
-                con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+                con = con = DBconnection.getConnection("jdbc:postgresql://aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres", DBconnection.getConnection(), "1syERFX5ObrpQ5qR");
                 pst = con.prepareStatement("DELETE FROM wishlist_item WHERE userID=? AND itemID=?");
                 pst.setInt(1, userID); pst.setInt(2, Integer.parseInt(itemId));
                 pst.executeUpdate();

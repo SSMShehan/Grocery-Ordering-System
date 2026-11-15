@@ -14,7 +14,7 @@
 
     try {
         Class.forName("org.postgresql.Driver");
-        con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+        con = con = DBconnection.getConnection("jdbc:postgresql://aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres", DBconnection.getConnection(), "1syERFX5ObrpQ5qR");
         stmt = con.createStatement();
 
         // 1. Total Orders

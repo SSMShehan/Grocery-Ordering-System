@@ -13,11 +13,11 @@
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            String url = "jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres";
-            String user = "postgres";
+            String url = "jdbc:postgresql://aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres";
+            String user = DBconnection.getConnection();
             String pass = "1syERFX5ObrpQ5qR";
             Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection(url, user, pass);
+            con = con = DBconnection.getConnection(url, user, pass);
             
             // Build the dynamic IN clause
             StringBuilder placeholders = new StringBuilder();
