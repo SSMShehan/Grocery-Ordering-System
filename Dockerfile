@@ -10,7 +10,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Stage 2: Setup Tomcat to run the application
-FROM tomcat:9.0-jdk17
+FROM tomcat:9.0-jdk21
 WORKDIR /usr/local/tomcat
 
 # Remove default tomcat applications to keep things clean
