@@ -10,9 +10,8 @@ RUN mvn clean package -DskipTests
 FROM tomcat:9.0-jdk21
 WORKDIR /usr/local/tomcat
 
-# Disable Tomcat shutdown port (8005) to stop Render health-check log spam and allow relaxed query characters
-RUN sed -i 's/port="8005" shutdown="SHUTDOWN"/port="-1" shutdown="SHUTDOWN"/g' conf/server.xml && \
-    sed -i 's/<Connector port="8080"/<Connector port="8080" relaxedQueryChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;" relaxedPathChars="[]|{}^&#x5c;&#x60;&quot;&lt;&gt;"/g' conf/server.xml
+# Disable Tomcat shutdown port (8005) to stop Render health-check log spam
+RUN sed -i 's/port="8005" shutdown="SHUTDOWN"/port="-1" shutdown="SHUTDOWN"/g' conf/server.xml
 
 # Remove default tomcat applications
 RUN rm -rf webapps/*
