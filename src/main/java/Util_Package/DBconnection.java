@@ -7,8 +7,7 @@ import java.sql.SQLException;
 public class DBconnection {
 
     private static String sanitizeUrl(String rawUrl) {
-        if (rawUrl == null)
-            return null;
+        if (rawUrl == null) return null;
         String cleaned = rawUrl.trim();
 
         // If markdown link format was pasted: [text](https://url) or [url](url)
@@ -24,8 +23,8 @@ public class DBconnection {
         }
 
         // Strip surrounding quotes
-        if ((cleaned.startsWith("\"") && cleaned.endsWith("\"")) ||
-                (cleaned.startsWith("'") && cleaned.endsWith("'"))) {
+        if ((cleaned.startsWith("\"") && cleaned.endsWith("\"")) || 
+            (cleaned.startsWith("'") && cleaned.endsWith("'"))) {
             cleaned = cleaned.substring(1, cleaned.length() - 1).trim();
         }
 
@@ -54,11 +53,10 @@ public class DBconnection {
     }
 
     private static String cleanValue(String val) {
-        if (val == null)
-            return null;
+        if (val == null) return null;
         String cleaned = val.trim();
-        if ((cleaned.startsWith("\"") && cleaned.endsWith("\"")) ||
-                (cleaned.startsWith("'") && cleaned.endsWith("'"))) {
+        if ((cleaned.startsWith("\"") && cleaned.endsWith("\"")) || 
+            (cleaned.startsWith("'") && cleaned.endsWith("'"))) {
             cleaned = cleaned.substring(1, cleaned.length() - 1).trim();
         }
         return cleaned;
