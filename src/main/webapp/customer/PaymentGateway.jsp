@@ -35,22 +35,83 @@
               </div>
             </div>
 
-            <!-- Live Virtual Card -->
-            <div class="credit-card">
-              <div class="chip"></div>
-              <div class="card-number-display" id="cardNumDisplay">#### #### #### ####</div>
-              <div class="card-details-row">
-                <div>
-                  <div class="card-label">Card Holder</div>
-                  <div id="cardNameDisplay">YOUR NAME</div>
+            <!-- Live Virtual Card (3D Luxury Edition) -->
+            <div class="card-scene" id="cardScene">
+              <div class="credit-card" id="creditCard">
+                <!-- FRONT FACE -->
+                <div class="card-face card-front">
+                  <div class="card-glass-shine"></div>
+                  
+                  <div class="card-top-row">
+                    <div class="card-brand-badge">
+                      <span class="brand-icon"><i class="fas fa-leaf"></i></span>
+                      <div class="brand-text">
+                        <span class="brand-name">FARMART</span>
+                        <span class="brand-tier">BLACK ELITE</span>
+                      </div>
+                    </div>
+                    <div class="contactless-wave">
+                      <i class="fas fa-wifi"></i>
+                    </div>
+                  </div>
+
+                  <div class="card-chip-row">
+                    <div class="emv-chip">
+                      <div class="chip-circuit"></div>
+                    </div>
+                  </div>
+
+                  <div class="card-number-display" id="cardNumDisplay">•••• •••• •••• ••••</div>
+
+                  <div class="card-details-row">
+                    <div class="card-info-group">
+                      <div class="card-label">CARDHOLDER</div>
+                      <div class="card-val" id="cardNameDisplay">YOUR NAME</div>
+                    </div>
+                    <div class="card-info-group">
+                      <div class="card-label">VALID THRU</div>
+                      <div class="card-val" id="cardExpDisplay">MM/YY</div>
+                    </div>
+                    <div class="card-network-logo" id="cardNetworkLogo">
+                      <!-- Visa Logo -->
+                      <div class="network-badge visa-badge" id="visaLogo">
+                        <span>VISA</span>
+                      </div>
+                      <!-- Mastercard Logo -->
+                      <div class="network-badge mastercard-badge" id="mcLogo" style="display:none;">
+                        <span class="mc-circle mc-red"></span>
+                        <span class="mc-circle mc-amber"></span>
+                      </div>
+                      <!-- Amex Logo -->
+                      <div class="network-badge amex-badge" id="amexLogo" style="display:none;">
+                        <span>AMEX</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div class="card-label">Expires</div>
-                  <div id="cardExpDisplay">MM/YY</div>
+
+                <!-- BACK FACE -->
+                <div class="card-face card-back">
+                  <div class="magnetic-stripe"></div>
+                  <div class="card-back-content">
+                    <div class="cvv-signature-row">
+                      <div class="signature-panel">
+                        <span class="sig-lines"></span>
+                      </div>
+                      <div class="cvv-box">
+                        <span class="cvv-label">CVV</span>
+                        <span class="cvv-text" id="cardCvvDisplay">•••</span>
+                      </div>
+                    </div>
+                    <div class="card-back-footer">
+                      <div class="disclaimer-text">
+                        Farmart Premier World Elite. Valid only with authorized signature. For 24/7 priority customer service, call 1-800-FARMART.
+                      </div>
+                      <div class="hologram-seal"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <i class="fab fa-cc-visa"
-                style="position: absolute; bottom: 25px; right: 25px; font-size: 2.5rem; opacity: 0.8;"></i>
             </div>
 
             <form action="api_complete_order.jsp" method="post" id="paymentForm">
@@ -100,7 +161,7 @@
                     <label class="field-label">CVC / CVV</label>
                     <div class="input-wrapper">
                       <i class="fas fa-key input-icon"></i>
-                      <input type="password" class="modern-input" placeholder="123" maxlength="3" required>
+                      <input type="password" class="modern-input" id="cardCvvInput" placeholder="123" maxlength="4" required>
                     </div>
                   </div>
                 </div>
@@ -155,31 +216,93 @@
         </div>
 
         <script>
-          // Live Card Update Script
+          // Live Card & 3D Interactive Script
+          const cardScene = document.getElementById('cardScene');
+          const creditCard = document.getElementById('creditCard');
           const cardNumInput = document.getElementById('cardNumInput');
           const cardNumDisplay = document.getElementById('cardNumDisplay');
           const cardNameInput = document.getElementById('cardNameInput');
           const cardNameDisplay = document.getElementById('cardNameDisplay');
           const cardExpInput = document.getElementById('cardExpInput');
           const cardExpDisplay = document.getElementById('cardExpDisplay');
+          const cardCvvInput = document.getElementById('cardCvvInput');
+          const cardCvvDisplay = document.getElementById('cardCvvDisplay');
+          const visaLogo = document.getElementById('visaLogo');
+          const mcLogo = document.getElementById('mcLogo');
+          const amexLogo = document.getElementById('amexLogo');
 
+          // Dynamic Card Number & Network Detection
           cardNumInput.addEventListener('input', (e) => {
             let val = e.target.value.replace(/\D/g, '').substring(0, 16);
-            val = val.match(/.{1,4}/g)?.join(' ') || val;
-            e.target.value = val;
-            cardNumDisplay.textContent = val || '#### #### #### ####';
+            let formatted = val.match(/.{1,4}/g)?.join(' ') || val;
+            e.target.value = formatted;
+            cardNumDisplay.textContent = formatted || '•••• •••• •••• ••••';
+
+            // Detect Card Brand
+            if (val.startsWith('4')) {
+              visaLogo.style.display = 'block';
+              mcLogo.style.display = 'none';
+              amexLogo.style.display = 'none';
+            } else if (val.startsWith('5') || val.startsWith('2')) {
+              visaLogo.style.display = 'none';
+              mcLogo.style.display = 'flex';
+              amexLogo.style.display = 'none';
+            } else if (val.startsWith('3')) {
+              visaLogo.style.display = 'none';
+              mcLogo.style.display = 'none';
+              amexLogo.style.display = 'block';
+            } else {
+              visaLogo.style.display = 'block';
+              mcLogo.style.display = 'none';
+              amexLogo.style.display = 'none';
+            }
           });
 
+          // Live Cardholder Name
           cardNameInput.addEventListener('input', (e) => {
             cardNameDisplay.textContent = e.target.value.toUpperCase() || 'YOUR NAME';
           });
 
+          // Live Expiry
           cardExpInput.addEventListener('input', (e) => {
             let val = e.target.value.replace(/\D/g, '').substring(0, 4);
             if (val.length >= 2) val = val.substring(0, 2) + '/' + val.substring(2);
             e.target.value = val;
             cardExpDisplay.textContent = val || 'MM/YY';
           });
+
+          // Live CVV & 3D Flip on Focus
+          cardCvvInput.addEventListener('input', (e) => {
+            let val = e.target.value.replace(/\D/g, '').substring(0, 4);
+            e.target.value = val;
+            cardCvvDisplay.textContent = val || '•••';
+          });
+
+          cardCvvInput.addEventListener('focus', () => {
+            creditCard.classList.add('flipped');
+          });
+
+          cardCvvInput.addEventListener('blur', () => {
+            creditCard.classList.remove('flipped');
+          });
+
+          // 3D Parallax Tilt Effect on Mouse Move
+          if (cardScene && creditCard) {
+            cardScene.addEventListener('mousemove', (e) => {
+              if (creditCard.classList.contains('flipped')) return;
+              const rect = cardScene.getBoundingClientRect();
+              const x = e.clientX - rect.left - rect.width / 2;
+              const y = e.clientY - rect.top - rect.height / 2;
+              const rotateX = -(y / (rect.height / 2)) * 12;
+              const rotateY = (x / (rect.width / 2)) * 14;
+              creditCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+            });
+
+            cardScene.addEventListener('mouseleave', () => {
+              if (creditCard.classList.contains('flipped')) return;
+              creditCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+          }
 
           // Simple Countdown
           let time = 300; // 5 minutes
