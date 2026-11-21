@@ -37,7 +37,8 @@
         
     } catch(Exception e) {
         e.printStackTrace();
-        response.sendRedirect("offers.jsp?error=Operation failed: " + e.getMessage());
+        String errMsg = e.getMessage() != null ? e.getMessage() : "Unknown error";
+        response.sendRedirect("offers.jsp?error=" + java.net.URLEncoder.encode("Operation failed: " + errMsg, "UTF-8"));
     } finally {
         if(pst!=null)try{pst.close();}catch(Exception e){}
         if(con!=null)try{con.close();}catch(Exception e){}
