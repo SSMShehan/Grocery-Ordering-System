@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*, java.util.*, Model_Package.CartItem" %>
+<%@ page import="Util_Package.DBconnection" %>
 <%
     Integer userID = (Integer) session.getAttribute("userID");
     List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cart");
@@ -23,8 +24,7 @@
     ResultSet rsKeys = null;
     
     try {
-        Class.forName("org.postgresql.Driver");
-        con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+        con = DBconnection.getConnection();
         con.setAutoCommit(false); // Begin Transaction
         
         // 1. Insert Order

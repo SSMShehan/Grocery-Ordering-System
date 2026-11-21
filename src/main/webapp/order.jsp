@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ page import="Util_Package.DBconnection" %>
 <%@ include file="admin_navbar.jsp" %>
 
 <h1 class="page-title">Manage Orders</h1>
@@ -46,8 +47,7 @@
     String searchParam = request.getParameter("search");
 
     try {
-        Class.forName("org.postgresql.Driver");
-        con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+        con = DBconnection.getConnection();
         
         String sql = "SELECT o.\"orderID\", o.order_date, o.amount, o.order_status, u.username " +
                      "FROM \"order\" o " +

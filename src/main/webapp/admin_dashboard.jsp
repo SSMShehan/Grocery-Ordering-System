@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*, java.util.*" %>
+<%@ page import="Util_Package.DBconnection" %>
 <%@ include file="admin_navbar.jsp" %>
 
 <%
@@ -13,8 +14,7 @@
     ResultSet rs = null;
 
     try {
-        Class.forName("org.postgresql.Driver");
-        con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+        con = DBconnection.getConnection();
         stmt = con.createStatement();
 
         // 1. Total Orders

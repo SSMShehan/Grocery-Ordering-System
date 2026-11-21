@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="Util_Package.DBconnection" %>
 <%
     String queryParam = request.getParameter("q");
     
@@ -12,11 +13,7 @@
         ResultSet rs = null;
         
         try {
-            String url = "jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres"; 
-            String user = "postgres";
-            String pass = "1syERFX5ObrpQ5qR"; 
-            Class.forName("org.postgresql.Driver"); 
-            con = DriverManager.getConnection(url, user, pass); 
+            con = DBconnection.getConnection(); 
             
             // ILIKE is PostgreSQL's case-insensitive LIKE
             String sql = "SELECT * FROM item WHERE name ILIKE ? AND quantity > '0' LIMIT 5";

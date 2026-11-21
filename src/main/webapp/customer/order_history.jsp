@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="Util_Package.DBconnection" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -40,8 +41,7 @@
         boolean hasOrders = false;
 
         try {
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+            con = DBconnection.getConnection();
             
             pst = con.prepareStatement("SELECT o.\"orderID\", o.amount, o.order_date, o.order_status, d.delivery_status " +
                                        "FROM \"order\" o LEFT JOIN order_delivery d ON o.\"orderID\" = d.\"orderID\" " +

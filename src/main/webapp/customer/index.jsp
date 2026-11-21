@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="Util_Package.DBconnection" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Map" %>
@@ -15,11 +16,7 @@
     ResultSet rs2 = null; 
     
     try { 
-        String url = "jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres"; 
-        String user = "postgres";
-        String pass = "1syERFX5ObrpQ5qR"; 
-        Class.forName("org.postgresql.Driver"); 
-        con = DriverManager.getConnection(url, user, pass); 
+        con = DBconnection.getConnection(); 
         
         // Fetch Flash Items (Items with discount)
         String query1 = "SELECT * FROM item WHERE discount_percentage > 0 AND quantity > '0' ORDER BY RANDOM() LIMIT 4";

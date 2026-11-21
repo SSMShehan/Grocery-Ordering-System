@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="Util_Package.DBconnection" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -17,8 +18,7 @@
     Connection con = null; PreparedStatement pstU = null; Statement stmtS = null;
     ResultSet rsU = null; ResultSet rsS = null;
     try {
-        Class.forName("org.postgresql.Driver");
-        con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+        con = DBconnection.getConnection();
         
         if (uID != null) {
             pstU = con.prepareStatement("SELECT email, phone, address, city, province, zipcode FROM customer WHERE \"cusID\" = ?");

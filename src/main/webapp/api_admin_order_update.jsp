@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="javax.servlet.http.HttpSession" %>
+<%@ page import="Util_Package.DBconnection" %>
 <%
     // Security Check
     HttpSession userSession = request.getSession(false);
@@ -21,8 +22,7 @@
     Connection con = null;
     PreparedStatement pst = null;
     try {
-        Class.forName("org.postgresql.Driver");
-        con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+        con = DBconnection.getConnection();
         
         pst = con.prepareStatement("UPDATE \"order\" SET order_status = ? WHERE \"orderID\" = ?");
         pst.setString(1, status);

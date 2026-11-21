@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*, java.util.*" %>
+<%@ page import="Util_Package.DBconnection" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     
@@ -13,11 +14,7 @@
         PreparedStatement pst = null;
         ResultSet rs = null;
         try {
-            String url = "jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres";
-            String user = "postgres";
-            String pass = "1syERFX5ObrpQ5qR";
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection(url, user, pass);
+            con = DBconnection.getConnection();
             
             // Build the dynamic IN clause
             StringBuilder placeholders = new StringBuilder();

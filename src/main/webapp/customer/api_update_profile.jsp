@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="Util_Package.DBconnection" %>
 
 <%
     Integer userID = (Integer) session.getAttribute("userID");
@@ -26,8 +27,7 @@
     PreparedStatement pst = null;
     
     try {
-        Class.forName("org.postgresql.Driver");
-        con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+        con = DBconnection.getConnection();
         
         String sql = "UPDATE customer SET name=?, email=?, phone=?, address=?, city=?, province=?, zipcode=? WHERE \"cusID\"=?";
         pst = con.prepareStatement(sql);

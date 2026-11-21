@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.*, java.sql.*" %>
+<%@ page import="Util_Package.DBconnection" %>
 <%
     // Initialize wishlist session if it doesn't exist
     Set<String> wishlist = (Set<String>) session.getAttribute("wishlist");
@@ -22,8 +23,7 @@
         if (userID != null) {
             Connection con = null; PreparedStatement pst = null;
             try {
-                Class.forName("org.postgresql.Driver");
-                con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+                con = DBconnection.getConnection();
                 pst = con.prepareStatement("INSERT INTO wishlist_item (userID, itemID) SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM wishlist_item WHERE userID=? AND itemID=?)");
                 pst.setInt(1, userID); pst.setInt(2, Integer.parseInt(itemId));
                 pst.setInt(3, userID); pst.setInt(4, Integer.parseInt(itemId));
@@ -43,8 +43,7 @@
         if (userID != null) {
             Connection con = null; PreparedStatement pst = null;
             try {
-                Class.forName("org.postgresql.Driver");
-                con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+                con = DBconnection.getConnection();
                 pst = con.prepareStatement("DELETE FROM wishlist_item WHERE userID=? AND itemID=?");
                 pst.setInt(1, userID); pst.setInt(2, Integer.parseInt(itemId));
                 pst.executeUpdate();

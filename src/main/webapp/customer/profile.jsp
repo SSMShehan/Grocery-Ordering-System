@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="Util_Package.DBconnection" %>
 
 <% 
     Integer userId = (Integer) session.getAttribute("userID"); 
@@ -22,8 +23,7 @@
     ResultSet rs = null;
 
     try {
-        Class.forName("org.postgresql.Driver");
-        con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+        con = DBconnection.getConnection();
         
         pst = con.prepareStatement("SELECT name, email, phone, address, city, province, zipcode, register_date FROM customer WHERE \"cusID\" = ?");
         pst.setInt(1, userId);

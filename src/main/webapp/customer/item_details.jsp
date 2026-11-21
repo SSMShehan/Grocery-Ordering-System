@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.sql.*" %>
+<%@ page import="Util_Package.DBconnection" %>
 <%@ page import="java.util.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% 
@@ -16,11 +17,7 @@
         ResultSet rsRelated = null;
         
         try { 
-            String url = "jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres"; 
-            String user = "postgres";
-            String pass = "1syERFX5ObrpQ5qR"; 
-            Class.forName("org.postgresql.Driver"); 
-            con = DriverManager.getConnection(url, user, pass); 
+            con = DBconnection.getConnection(); 
             
             // 1. Fetch the main item
             String query = "SELECT * FROM item WHERE \"itemID\" = ?";

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ page import="Util_Package.DBconnection" %>
 <%@ include file="admin_navbar.jsp" %>
 
 <div class="header-container" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
@@ -52,8 +53,7 @@
     String searchParam = request.getParameter("search");
 
     try {
-        Class.forName("org.postgresql.Driver");
-        con = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+        con = DBconnection.getConnection();
         
         if (searchParam != null && !searchParam.trim().isEmpty()) {
             pst = con.prepareStatement("SELECT * FROM item WHERE name ILIKE ? OR category ILIKE ? ORDER BY \"itemID\" DESC");

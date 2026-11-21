@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ page import="javax.servlet.http.HttpSession" %>
     <%@ page import="java.sql.*" %>
+    <%@ page import="Util_Package.DBconnection" %>
     <%@ page import="java.util.List" %>
     <%@ page import="java.util.ArrayList" %>
     <%@ page import="java.util.Map" %>
@@ -14,8 +15,7 @@
     PreparedStatement navPst = null;
     ResultSet navRs = null;
     try {
-        Class.forName("org.postgresql.Driver");
-        navCon = DriverManager.getConnection("jdbc:postgresql://db.mupdoceejdvgqkoqnsst.supabase.co:5432/postgres", "postgres", "1syERFX5ObrpQ5qR");
+        navCon = DBconnection.getConnection();
         navPst = navCon.prepareStatement("SELECT name FROM category ORDER BY name ASC");
         navRs = navPst.executeQuery();
         while (navRs.next()) {
